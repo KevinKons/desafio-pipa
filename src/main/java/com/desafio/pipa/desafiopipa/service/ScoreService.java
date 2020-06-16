@@ -3,7 +3,6 @@ package com.desafio.pipa.desafiopipa.service;
 import com.desafio.pipa.desafiopipa.model.Highscores;
 import com.desafio.pipa.desafiopipa.model.Score;
 import com.desafio.pipa.desafiopipa.model.ScoreStorage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -13,8 +12,13 @@ public class ScoreService {
 
     public static final int LIST_MAX_SIZE = 20000;
 
-    @Autowired
-    private RadixSortService sortService;
+    private final RadixSortService sortService;
+    private final BinarySearchService binarySearchService;
+
+    public ScoreService(RadixSortService sortService, BinarySearchService binarySearchService) {
+        this.sortService = sortService;
+        this.binarySearchService = binarySearchService;
+    }
 
     public void saveScore(Score score) {
         ScoreStorage scoreStorage = ScoreStorage.getInstance();
@@ -53,14 +57,17 @@ public class ScoreService {
 
     //TO DO: Apply binary search
     private Score getScoreWithPosition(Score[] scoresArray, long userId) {
-        for(int i = 0; i < scoresArray.length; i++) {
-            Score score = scoresArray[i];
-            if(score.getUserId() == userId) {
-                score.setPosition(i+1);
-                return score;
-            }
-        }
-        return null;
+        Score scoreBeingSearched = ScoreStorage.getInstance().getScores().get(userId);
+        binarySearchService.searchAndSetPosition(scoresArray, scoreBeingSearched);
+        return scoreBeingSearched;
+//        for(int i = 0; i < scoresArray.length; i++) {
+//            Score score = scoresArray[i];
+//            if(score.getUserId() == userId) {
+//                score.setPosition(i+1);
+//                return score;
+//            }
+//        }
+//        return null;
     }
 
     public Highscores list() {
