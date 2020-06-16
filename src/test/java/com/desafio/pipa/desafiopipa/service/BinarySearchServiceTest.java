@@ -56,8 +56,8 @@ public class BinarySearchServiceTest {
     }
 
     @Test
-    @DisplayName("searchAndSetPosition - Search the position of the score being passed through parms and set in " +
-            "the score its position when there is only one score in the array")
+    @DisplayName("searchAndSetPosition - Search the position of the score being passed through parms and set its " +
+            "position when there is only one score in the array")
     public void test03() {
         Score scoreBeingSearched = new Score(20, 3L);
         Score[] scores = new Score[]{
@@ -70,8 +70,8 @@ public class BinarySearchServiceTest {
     }
 
     @Test
-    @DisplayName("searchAndSetPosition - Search the position of the score being passed through parms and set in " +
-            "the score its position when there is only one score in the array")
+    @DisplayName("searchAndSetPosition - Search the position of the score being passed through parms and set its " +
+            "position when there is more than one score in the array and the score being searched is the 1st position")
     public void test04() {
         Score scoreBeingSearched = new Score(30000, 3L);
         Score[] scores = new Score[]{
@@ -89,7 +89,7 @@ public class BinarySearchServiceTest {
 
     @Test
     @DisplayName("searchAndSetPosition - Search the position of the score being passed through parms and set in " +
-            "the score its position")
+            "the score its position and the score being searched is the 3rd position")
     public void test05() {
         Score scoreBeingSearched = new Score(20, 3L);
         Score[] scores = new Score[]{
